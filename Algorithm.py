@@ -1,17 +1,43 @@
+import ast
 from collections import deque, namedtuple
 
 inf = float('inf')
-Edge = namedtuple('Edge', 'start, end, cost')
+Edge = namedtuple('Edge', 'start, end, cost, dir')
 
+Grafo= []
 #read txt
-f = open ('nodos.txt', 'r')
-nods = f.read()
-print (nods)
-f.close()
+#f = open ('nodos.txt', 'r')
+archivo=open('nodos.txt','r')
+#leer_fila= archivo.readlines()
+for lista in archivo.readlines():
+    #print (lista)
+    nt= lista.replace("\n", "")
+    nt2= ast.literal_eval(nt)
+    Grafo.append(nt2)
+
+    
+
+	#dato = list(lista)
+archivo.close()
+
+
+print(Grafo)
+for i in Grafo:
+    print(type(i))
+
+#nods = f.read()
+#print (nods)
+# Grafo.append(nods)
+# print(type(Grafo))
+
+# f.close()
+# print(Grafo)
+
+
 
 #Program
-def make_edge(start, end, cost=1):
-    return Edge(start, end, cost)
+def make_edge(start, end, cost=1, dir=1):
+    return Edge(start, end, cost, dir)
 
 
 class Graph:
@@ -93,12 +119,19 @@ class Graph:
         if path:
             path.appendleft(current_vertex)
         return path
-
-
-#graph = nods
-graph = Graph([
+variable= [
     ("a", "b", 7),  ("a", "c", 9),  ("a", "f", 14), ("b", "c", 10),
     ("b", "d", 15), ("c", "d", 11), ("c", "f", 2),  ("d", "e", 6),
-    ("e", "f", 9)])
+    ("e", "f", 9)]
+
+for i in variable:
+    print(type(i))
+
+print(variable)
+
+#graph = nods
+graph = Graph(Grafo)
+
+print(type(graph))
 
 print(graph.dijkstra("a", "e"))
