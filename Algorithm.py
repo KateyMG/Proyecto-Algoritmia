@@ -1,43 +1,72 @@
 import ast
 from collections import deque, namedtuple
 
+
+both_ends = True
+nodoinit=""
+nodofin=""
+
+
 inf = float('inf')
-Edge = namedtuple('Edge', 'start, end, cost, dir')
+Edge = namedtuple('Edge', 'start, end, cost')
 
 Grafo= []
 #read txt
-#f = open ('nodos.txt', 'r')
 archivo=open('nodos.txt','r')
-#leer_fila= archivo.readlines()
 for lista in archivo.readlines():
-    #print (lista)
     nt= lista.replace("\n", "")
     nt2= ast.literal_eval(nt)
     Grafo.append(nt2)
-
-    
-
-	#dato = list(lista)
 archivo.close()
 
 
-print(Grafo)
-for i in Grafo:
-    print(type(i))
 
-#nods = f.read()
-#print (nods)
-# Grafo.append(nods)
-# print(type(Grafo))
+#menu
+def menu():
+    print("El grafo a evaluar es... ¿dirgido (1) o no dirgigido (0)?")
+    choice = input()
+    if choice == "1":
+        both_endsl=False
+        both_ends=both_endsl 
+        print("El grafo es Dirigido")
+        print("Elija el nodo de inicio")
+        nodoinit = input()   
+        print("Elija el nodo final")
+        nodofin = input()
+        print("La ruta más corta es : ")
+        # print(str(both_ends))
+        # print(str(nodoinit))
+        # print(str(nodofin))
+        print(graph.dijkstra(str(nodoinit), str(nodofin)))
+    elif choice == "0":
+        both_endsl=True
+        both_ends=both_endsl
+        print("El grafo es No dirigido")
+        print("Elija el nodo de inicio")
+        nodoinit = input()   
+        print("Elija el nodo final")
+        nodofin = input()
+        print("La ruta más corta es : ")
+        # print(str(both_ends))
+        # print(str(nodoinit))
+        # print(str(nodofin))
+        print(graph.dijkstra(str(nodoinit), str(nodofin)))
+    else:
+        print("Inserte una opción válida\n")
+        menu()
+    return both_ends
 
-# f.close()
-# print(Grafo)
-
-
+def eleccion():
+    print("Elija el nodo de inicio")
+    nodoinit = input()
+    
+    print("Elija el nodo final")
+    nodofin = input()
+    
 
 #Program
-def make_edge(start, end, cost=1, dir=1):
-    return Edge(start, end, cost, dir)
+def make_edge(start, end, cost=1):
+    return Edge(start, end, cost)
 
 
 class Graph:
@@ -119,19 +148,16 @@ class Graph:
         if path:
             path.appendleft(current_vertex)
         return path
+
 variable= [
     ("a", "b", 7),  ("a", "c", 9),  ("a", "f", 14), ("b", "c", 10),
     ("b", "d", 15), ("c", "d", 11), ("c", "f", 2),  ("d", "e", 6),
     ("e", "f", 9)]
 
-for i in variable:
-    print(type(i))
-
-print(variable)
+# for i in variable:
+#     print(type(i))
 
 #graph = nods
 graph = Graph(Grafo)
 
-print(type(graph))
-
-print(graph.dijkstra("a", "e"))
+menu()
