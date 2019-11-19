@@ -19,8 +19,6 @@ for lista in archivo.readlines():
     Grafo.append(nt2)
 archivo.close()
 
-
-
 #menu
 def menu():
     print("El grafo a evaluar es... ¿dirgido (1) o no dirgigido (0)?")
@@ -71,7 +69,6 @@ def make_edge(start, end, cost=1):
 
 class Graph:
     def __init__(self, edges):
-     # let's check that the data is right
         wrong_edges = [i for i in edges if len(i) not in [2, 3]]
         if wrong_edges:
             raise ValueError('Wrong edges data: {}'.format(wrong_edges))
@@ -81,8 +78,6 @@ class Graph:
     @property
     def vertices(self):
         return set(
-            # this piece of magic turns ([1,2], [3,4]) into [1, 2, 3, 4]
-            # the set above makes it's elements unique.
             sum(
                 ([edge.start, edge.end] for edge in self.edges), []
             )
@@ -149,10 +144,6 @@ class Graph:
             path.appendleft(current_vertex)
         return path
 
-variable= [
-    ("a", "b", 7),  ("a", "c", 9),  ("a", "f", 14), ("b", "c", 10),
-    ("b", "d", 15), ("c", "d", 11), ("c", "f", 2),  ("d", "e", 6),
-    ("e", "f", 9)]
 
 # for i in variable:
 #     print(type(i))
